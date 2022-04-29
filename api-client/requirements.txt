@@ -1,0 +1,16 @@
+alembic==1.7.7
+Flask==2.0.2
+Flask-JWT-Extended==4.3.1
+flask-marshmallow==0.14.0
+Flask-Migrate==3.1.0
+Flask-RESTful==0.3.9
+Flask-SQLAlchemy==2.5.1
+marshmallow==3.15.0
+marshmallow-sqlalchemy==0.28.0
+marshmallow-enum==1.5.1
+psycopg2==2.9.3
+python-dotenv==0.20.0
+SQLAlchemy==1.4.32
+virtualenv==20.13.1
+virtualenv-clone==0.5.7
+Werkzeug==2.0.3

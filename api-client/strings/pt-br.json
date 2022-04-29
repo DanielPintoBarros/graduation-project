@@ -1,0 +1,8 @@
+{
+    "user_email_exists": "Este email '{}' já está sendo utilizado.",
+    "user_invalid_credentials": "Credenciais Inválidas! Favor checar email e senha.",
+
+    "register_not_exists": "Medidor não existe.",
+    "register_created": "Medidor criado.",
+    "register_deleted": "Medidor deletado do banco de dados."
+}
