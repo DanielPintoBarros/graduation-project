@@ -16,6 +16,7 @@ from resources.water_meassure import ( WaterMeassure, WaterMeassureList )
 from resources.meassure import (MeassureRegister, MeassuresFromRegister )
 from resources.confirmation import ( Confirmation, ConfirmationByUser )
 from models.user import UserModel
+from models.confirmation import ConfirmationModel
 from schemas.user import UserSchema
 from tools.enums import UserAccessLevelEnum
 load_dotenv('.env')
@@ -54,6 +55,10 @@ def create_tables():
         user.updated_at = datetime.now()
         user.save_to_db()
 
+        confirmation = ConfirmationModel(user.id)
+        confirmation.confirmed = True
+        confirmation.save_to_db()
+
 jwt = JWTManager(app)
 
 @jwt.token_in_blocklist_loader
@@ -65,7 +70,7 @@ def home():
     return "Hello!"
 
 api.add_resource(User, "/user")
-api.add_resource(UserRegister, "/logup")
+api.add_resource(UserRegister, "/loginup")
 api.add_resource(UserLogin, "/login")
 api.add_resource(TokenRefresh, "/refresh")
 api.add_resource(UserLogout, "/logout")

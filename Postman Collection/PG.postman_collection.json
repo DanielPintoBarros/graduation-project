@@ -1,0 +1,754 @@
+{
+	"info": {
+		"_postman_id": "1d672627-546e-4e01-9489-993a686e950a",
+		"name": "PG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Loginup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"danielpbarros95@gmail.com\",\r\n    \"password\": \"1234\",\r\n    \"first_name\": \"Daniel\",\r\n    \"last_name\": \"Barros\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/loginup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"loginup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"access_token not empty\", function () {\r",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"refresh token not empty\", function () {\r",
+									"    pm.expect(jsonData.refresh_token).not.eql(undefined);\r",
+									"});\r",
+									"// set access token as environement variable\r",
+									"if (jsonData.access_token !== undefined) {\r",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);\r",
+									"} else {\r",
+									"    postman.setEnvironmentVariable(\"access_token\", null);\r",
+									"}\r",
+									"// set refresh token as environement variable\r",
+									"if (jsonData.refresh_token !== undefined) {\r",
+									"    postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+									"} else {\r",
+									"    postman.setEnvironmentVariable(\"refresh_token\", null);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"danielpbarros95@gmail.com\",\r\n    \"password\": \"1234\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"asda\",\r\n    \"last_name\": \"asda\",\r\n    \"email\": \"asda\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.test(\"access_token not empty\", function () {\r",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);\r",
+									"});\r",
+									"// set access token as environement variable\r",
+									"if (jsonData.access_token !== undefined) {\r",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);\r",
+									"} else {\r",
+									"    postman.setEnvironmentVariable(\"access_token\", null);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/refresh",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogOut",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"asda\",\r\n    \"last_name\": \"asda\",\r\n    \"email\": \"asda\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserChangePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"asda\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/change/password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"change",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Grant Admin Access",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"danielpbarros95@gmail.com\",\r\n    \"access_level\": \"ADMIN\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/user/change/access",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"change",
+								"access"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "register",
+			"item": [
+				{
+					"name": "Create Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Registro teste 1\",\r\n    \"latitude\": \"33333\",\r\n    \"longitude\": \"5555\",\r\n    \"register_type\": \"ENERGY\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All registers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/registers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"registers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/register/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit register",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Registro teste 3\",\r\n    \"latitude\": \"44444\",\r\n    \"longitude\": \"55555555555\",\r\n    \"register_type\": \"WATER\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/register/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Register",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/register/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "measures",
+			"item": [
+				{
+					"name": "Create electric meassure",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"va\": 23.4,\r\n    \"w\": 34.5,\r\n    \"var\": 45.6,\r\n    \"irms\": 56.7,\r\n    \"vrms\": 60,\r\n    \"fp\": 0.8\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/meassure",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meassure"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create water meassure",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": 423.4\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/meassure",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"meassure"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get meassures by register",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/eleMeassure/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"eleMeassure",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EletricMeassure",
+			"item": [
+				{
+					"name": "Get meassurer by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/eleMeassure/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"eleMeassure",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get meassurers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/eleMeassures",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"eleMeassures"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get meassurers Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/eleMeassure/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"eleMeassure",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WaterMeassure",
+			"item": [
+				{
+					"name": "Get meassurer by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/eleMeassure/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"eleMeassure",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get meassurers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/watMeassures?",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"watMeassures"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get meassurers Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/watMeassure/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"watMeassure",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Confirmation",
+			"item": [
+				{
+					"name": "Confirm email",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Resend confirmation email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/resentconfirmationemail/:user_email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"resentconfirmationemail",
+								":user_email"
+							],
+							"variable": [
+								{
+									"key": "user_email",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

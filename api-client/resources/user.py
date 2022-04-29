@@ -23,7 +23,7 @@ user_schema = UserSchema()
 
 class User(Resource):
     @classmethod
-    @jwt_required
+    @jwt_required()
     def post(cls):
         user_id = get_jwt_identity()
         user = UserModel.find_by_id(user_id)
@@ -51,7 +51,7 @@ class User(Resource):
 
 
     @classmethod
-    @jwt_required
+    @jwt_required()
     def delete(cls):
         jti = get_jwt()["jti"]
         user_id = get_jwt_identity()
@@ -67,7 +67,7 @@ class User(Resource):
 
 class UserPassword(Resource):
     @classmethod
-    @jwt_required
+    @jwt_required()
     def post(cls):
         json = request.get_json()
         user_id = get_jwt_identity()
@@ -85,24 +85,26 @@ class UserPassword(Resource):
 
 class UserGiveAccess(Resource):
     @classmethod
-    @jwt_required
+    @jwt_required()
     def post(cls):
         try:
             checkAccessAllowed([UserAccessLevelEnum.ADMIN])
         except:
             return {"message": "User not allowed"}, 401
-
-        json = request.get_json()
-        if "email" not in json or "access_level" not in json:
+        print("loading Json data")
+        json_data = request.get_json()
+        print("json data loaded")
+        print(json_data)
+        if "email" not in json_data or "access_level" not in json_data:
             return {"message": "fields 'email' and 'access_level' are required"}, 400
-        if json["access_level"] not in UserAccessLevelEnum._value2member_map_:
+        if json_data["access_level"] not in UserAccessLevelEnum._value2member_map_:
             return {"message": "'access_level' should be one of the followings 'ADMIN', 'VIEWER', 'OPERATOR'"}
         
-        user = UserModel.find_by_email(json["email"])
-        user.access_level = UserAccessLevelEnum(json["access_level"])
+        user = UserModel.find_by_email(json_data["email"])
+        user.access_level = UserAccessLevelEnum(json_data["access_level"])
         user.save_to_db()
 
-        return {"message": "User {}, is now a {}".format(user.email, user.access_level)}, 200
+        return {"message": "User {}, is now a {}".format(user.email, user.access_level.value)}, 200
 
 
 class UserRegister(Resource):
@@ -137,7 +139,7 @@ class UserLogin(Resource):
     @classmethod
     def post(cls):
         user_json = request.get_json()
-        user_data = user_schema.load(user_json, partial=("username", "access_level", "first_name", "last_name"))
+        user_data = user_schema.load(user_json, partial=("access_level", "first_name", "last_name"))
 
         user = UserModel.find_by_email(user_data.email.lower())
 
