@@ -9,7 +9,9 @@ class UserAccessLevelEnum(enum.Enum):
 
 
 class RegisterTypeEnum(enum.Enum):
-    ENERGY = "ENERGY"
+    ENERGY1 = "ENERGY1"
+    ENERGY2 = "ENERGY2"
+    ENERGY3 = "ENERGY3"
     WATER = "WATER"
 
 

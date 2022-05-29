@@ -128,7 +128,7 @@ class UserRegister(Resource):
 
             print("prepare to send email")
             user.send_confirmation_email()
-            return {"messsage": "User created! We send you a email to confirm the registration.",
+            return {"message": "User created! We send you a email to confirm the registration.",
                     "user": user_schema.dump(user)}, 201
         except Exception as e:
             user.delete_from_db()
@@ -160,7 +160,7 @@ class UserLogout(Resource):
         jti = get_jwt()["jti"]
         user_id = get_jwt_identity()
         BLOCKLIST.add(jti)
-        return {"message": gettext("user_logged_out").format(user_id)}, 200
+        return {"message": "User Logged out"}, 200
 
 
 class TokenRefresh(Resource):

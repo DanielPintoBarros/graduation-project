@@ -3,25 +3,27 @@ import os
 from dotenv import load_dotenv
 
 from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from marshmallow import ValidationError
 
 from db import db
 from blocklist import BLOCKLIST
-from resources.register import ( Register, RegisterList, RegisterRegister )
+from resources.register import ( Register, RegisterList, RegisterRegister, RegisterModbus )
+from resources.register_groups import ( RegisterGroups, RegisterByRegisterGroup)
 from resources.user import ( UserRegister, UserLogin, UserLogout, TokenRefresh, UserPassword, User, UserGiveAccess )
-from resources.electric_meassure import ( ElectricMeassure, ElectricMeassureList )
-from resources.water_meassure import ( WaterMeassure, WaterMeassureList )
-from resources.meassure import (MeassureRegister, MeassuresFromRegister )
+from resources.meassure import (MeassureRegister, MeassureFromRegister, MeassuresFromRegister, Meassure, MeassureList)
 from resources.confirmation import ( Confirmation, ConfirmationByUser )
 from models.user import UserModel
 from models.confirmation import ConfirmationModel
 from schemas.user import UserSchema
 from tools.enums import UserAccessLevelEnum
+from datetime import timedelta
 load_dotenv('.env')
 
 app = Flask(__name__)
+CORS(app)
 
 pguser = os.environ.get("PGUSER")
 pghost = os.environ.get("PGHOST")
@@ -34,6 +36,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = postgres_url #os.environ.get("DATABASE_U
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config['JWT_SECRET_KEY'] = "DEVELOPMENT-SECRET-KEY"
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=12)
+app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
 api = Api(app)
 
 @app.errorhandler(ValidationError)
@@ -59,6 +63,22 @@ def create_tables():
         confirmation.confirmed = True
         confirmation.save_to_db()
 
+
+        user = UserSchema().load({
+        "email": "modbus",
+        "password": "modbus",
+        "access_level":  UserAccessLevelEnum.OPERATOR,
+        "first_name": "modbus",
+        "last_name": "modbus"
+        })
+        user.created_at = datetime.now()
+        user.updated_at = datetime.now()
+        user.save_to_db()
+
+        confirmation = ConfirmationModel(user.id)
+        confirmation.confirmed = True
+        confirmation.save_to_db()
+
 jwt = JWTManager(app)
 
 @jwt.token_in_blocklist_loader
@@ -70,7 +90,7 @@ def home():
     return "Hello!"
 
 api.add_resource(User, "/user")
-api.add_resource(UserRegister, "/loginup")
+api.add_resource(UserRegister, "/signup")
 api.add_resource(UserLogin, "/login")
 api.add_resource(TokenRefresh, "/refresh")
 api.add_resource(UserLogout, "/logout")
@@ -80,16 +100,18 @@ api.add_resource(UserGiveAccess, "/user/change/access")
 api.add_resource(RegisterRegister, "/register")
 api.add_resource(Register, "/register/<int:id>")
 api.add_resource(RegisterList, "/registers")
+api.add_resource(RegisterModbus,"/registers/modbusOn")
 
-api.add_resource(ElectricMeassureList, "/eleMeassures")
-api.add_resource(ElectricMeassure, "/eleMeassure/<int:id>")
+        
+api.add_resource(RegisterGroups, "/regGroup" )
+api.add_resource(RegisterByRegisterGroup, "/regGroup/<int:id>/registers" )
 
-api.add_resource(WaterMeassureList, "/watMeassures")
-api.add_resource(WaterMeassure, "/watMeassure/<int:id>")
+api.add_resource(MeassureList, "/meassures")
+api.add_resource(Meassure, "/meassure/<int:id>")
 
 api.add_resource(MeassureRegister, "/meassure")
+api.add_resource(MeassureFromRegister,"/register/<int:registerId>/lastMeassure")
 api.add_resource(MeassuresFromRegister,"/register/<int:registerId>/meassures")
-
 api.add_resource(Confirmation, "/confirmation/<string:confirmation_id>")
 api.add_resource(ConfirmationByUser, "/resentconfirmationemail/<string:user_email>")
 

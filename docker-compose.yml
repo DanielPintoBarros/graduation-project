@@ -7,10 +7,10 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
     volumes:
-      -  ./pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     restart: always
     ports:
-      - '15432:5432'
+      - '13000:5432'
 
   nginx:
     depends_on:
@@ -21,7 +21,7 @@ services:
       context: ./nginx
     ports:
       - '5000:80'
-  
+
   api-client:
     depends_on:
       - postgres
@@ -40,4 +40,26 @@ services:
     expose:
       - '5000'
 
-
+  mudbus-listener:
+    depends_on:
+      - api-client
+      - postgres
+    #restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./modbus-listener
+    volumes:
+      - ./modbus-listener:/app
+#  web-interface:
+#    depends_on:
+#      - api-client
+#    build:
+#      dockerfile: Dockerfile.dev
+#      context: ./web-interface
+#    volumes:
+#      - ./web-interface:/app
+#    restart: always
+#    environment:
+#      APICLIENTURL: api-client
+#    expose:
+#      - '3000'

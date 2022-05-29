@@ -1,0 +1,30 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.center {
+  text-align: center;
+}
+
+.content {
+  text-align: center;
+  padding: 1rem;
+}
+
+.openModalBtn {
+  transform: translate(0px, -60px);
+  margin: 20px;
+  width: 60px;
+  float: right;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgb(94, 46, 133);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.h1 {
+  text-align: center;
+}

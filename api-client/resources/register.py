@@ -6,13 +6,15 @@ from flask_jwt_extended import jwt_required
 
 from models.register import RegisterModel
 from models.user import UserModel
-from schemas.register import RegisterSchema
+from schemas.register import RegisterSchema, RegisterModbusSchema
 from tools.enums import UserAccessLevelEnum
 from tools.helper import checkAccessAllowed
 from tools.strings import gettext
 
 register_schema = RegisterSchema()
 register_list_schema = RegisterSchema(many=True)
+
+register_modbus_list_schema = RegisterModbusSchema(many=True)
 
 
 class RegisterRegister(Resource):
@@ -26,6 +28,7 @@ class RegisterRegister(Resource):
 
         register_json = request.get_json()
         register_json["register_type"] = str(register_json["register_type"])
+        print(register_json["register_group_id"])
         register = register_schema.load(register_json)
         register.save_to_db()
 
@@ -112,3 +115,15 @@ class RegisterList(Resource):
             return {"message": "User not allowed"}, 401
 
         return {"registers": register_list_schema.dump(RegisterModel.find_all())}, 200
+
+
+class RegisterModbus(Resource):
+    @classmethod
+    @jwt_required()
+    def get(cls):
+        try:
+            checkAccessAllowed([UserAccessLevelEnum.ADMIN, UserAccessLevelEnum.OPERATOR])
+        except:
+            return {"message": "User not allowed"}, 401
+        
+        return {"registers": register_modbus_list_schema.dump(RegisterModel.find_modbus_on())}, 200

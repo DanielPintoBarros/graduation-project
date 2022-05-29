@@ -2,3 +2,6 @@ __pycache__
 *.pyc
 api-client/.env
 pgdata
+web-interface/node_modules/*
+web-interface/package-lock.json
+web-interface/public/*
