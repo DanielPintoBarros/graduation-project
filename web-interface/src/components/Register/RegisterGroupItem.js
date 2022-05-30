@@ -10,7 +10,7 @@ const RegisterGroupItem = (props) => {
 
   return (
     <li className={classes.item}>
-      <div>
+      <header className={classes.buttonCardHeader}>
         <button
           className={classes.openModalBtn}
           onClick={() => setOpenEditRegGroup(true)}
@@ -39,7 +39,7 @@ const RegisterGroupItem = (props) => {
             closeModal={setOpenDeleteRegGroup}
           />
         )}
-      </div>
+      </header>
       <div className={classes.content}>
         <h3>{props.group.name}</h3>
         <p>{props.group.description}</p>

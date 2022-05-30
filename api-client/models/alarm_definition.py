@@ -1,24 +1,45 @@
 from db import db
+from typing import List
 
-from tools.enums import AlarmSeverityEnum, RegisterTypeEnum
+from tools.enums import AlarmSeverityEnum
 
 
-class AlarmDefinition(db.Model):
+class AlarmDefinitionModel(db.Model):
     __tablename__ = "alarm_definitions"
     
     id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(200), nullable=False)
+    severity = db.Column(db.Enum(AlarmSeverityEnum), nullable=False)
+    register_id = db.Column(db.Integer, db.ForeignKey("registers.id"), nullable=False)
 
-    register_type = db.Column(db.Enum(RegisterTypeEnum), nullable=False)
+    w_thr = db.Column(db.Float)
+    va_thr = db.Column(db.Float)
+    irms_thr = db.Column(db.Float)
+    vrms_thr = db.Column(db.Float)
+    fp_thr = db.Column(db.Float)
+    E_thr = db.Column(db.Float)
+    energyInterval = db.Column(db.Integer)
 
-    va_m = db.Column(db.Float)
-    w_m = db.Column(db.Float)
-    var_m = db.Column(db.Float)
-    irms_m = db.Column(db.Float)
-    vrms_m = db.Column(db.Float)
-    fp_m = db.Column(db.Float)
+    value_thr = db.Column(db.Float)
+    waterInterval = db.Column(db.Integer)
 
-    value_m = db.Columns(db.Float)
     
-    severity = db.Column(db.Enum(AlarmSeverityEnum))
-    
-    pass
+    @classmethod
+    def find_all(cls) -> List["AlarmDefinitionModel"]:
+        return cls.query.all()
+
+    @classmethod
+    def find_by_id(cls, _id: int) -> "AlarmDefinitionModel":
+        return cls.query.filter_by(id=_id).first()
+
+    @classmethod
+    def fing_by_register_id(cls, _id: int) -> List["AlarmDefinitionModel"]:
+        return cls.query.filter_by(register_id=_id).all()
+
+    def save_to_db(self) -> None:
+        db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self) -> None:
+        db.session.delete(self)
+        db.session.commit()

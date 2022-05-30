@@ -10,6 +10,7 @@ from marshmallow import ValidationError
 
 from db import db
 from blocklist import BLOCKLIST
+from resources.alarm_definition import AlarmDefinition, AlarmDefinitionID, AlarmDefinitionRegisterID
 from resources.register import ( Register, RegisterList, RegisterRegister, RegisterModbus )
 from resources.register_groups import ( RegisterGroups, RegisterByRegisterGroup)
 from resources.user import ( UserRegister, UserLogin, UserLogout, TokenRefresh, UserPassword, User, UserGiveAccess )
@@ -114,6 +115,10 @@ api.add_resource(MeassureFromRegister,"/register/<int:registerId>/lastMeassure")
 api.add_resource(MeassuresFromRegister,"/register/<int:registerId>/meassures")
 api.add_resource(Confirmation, "/confirmation/<string:confirmation_id>")
 api.add_resource(ConfirmationByUser, "/resentconfirmationemail/<string:user_email>")
+
+api.add_resource(AlarmDefinition, '/alarmDefinitions')
+api.add_resource(AlarmDefinitionID, '/alarmDefinitions/<int:id>')
+api.add_resource(AlarmDefinitionRegisterID, '/register/<int:id>/alarmDefinitions')
 
 if __name__ == "__main__":
     db.init_app(app)

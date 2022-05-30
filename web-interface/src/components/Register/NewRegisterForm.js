@@ -23,7 +23,7 @@ const NewRegisterGroupForm = (props) => {
     const enteredRegisterType = registerTypeInputRef.current.value;
     const enteredModbusPort = modbusPortInputRef.current.value;
 
-    var body = {
+    const body = {
       description: enteredDescription,
       latitude: enteredLatitude,
       longitude: enteredLongitude,

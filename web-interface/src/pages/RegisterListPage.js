@@ -48,7 +48,7 @@ const RegisterListPage = (props) => {
 
   return (
     <section>
-      <div>
+      <header className={classes.headerTopic}>
         <h1 className={classes.h1}>Medidores do Grupo</h1>
         <button
           className={classes.openModalBtn}
@@ -63,7 +63,7 @@ const RegisterListPage = (props) => {
             closeModal={setOpenNewRegister}
           />
         )}
-      </div>
+      </header>
 
       {isLoading && <div className={classes.content}>Loading...</div>}
       {!isLoading && registers.length === 0 && (

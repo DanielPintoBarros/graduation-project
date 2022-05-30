@@ -25,6 +25,10 @@
   cursor: pointer;
 }
 
+.headerTopic {
+  height: 80px;
+}
+
 .h1 {
   text-align: center;
 }

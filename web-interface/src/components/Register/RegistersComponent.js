@@ -8,7 +8,7 @@ const RegisterComponent = (props) => {
 
   return (
     <li className={props.center ? classes.unique : classes.item}>
-      <div>
+      <header className={classes.buttonCardHeader}>
         <button
           className={classes.openModalBtn}
           onClick={() => setOpenDeleteRegister(true)}
@@ -23,7 +23,7 @@ const RegisterComponent = (props) => {
             closeModal={setOpenDeleteRegister}
           />
         )}
-      </div>
+      </header>
       <div className={classes.content}>
         <h3>{props.register.description}</h3>
         <p>Latitude: {props.register.latitude}</p>

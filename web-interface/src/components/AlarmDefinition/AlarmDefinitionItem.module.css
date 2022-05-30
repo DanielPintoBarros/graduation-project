@@ -24,12 +24,10 @@
 
 .content {
   text-align: center;
-  padding: 1rem;
 }
 
 .content h3 {
   font-size: 1.25rem;
-  margin-top: 0px;
   color: #2c292b;
 }
 
@@ -84,7 +82,7 @@
 }
 
 .modalContainer {
-  width: 500px;
+  width: 700px;
   border-radius: 12px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -106,9 +104,6 @@
   align-items: center;
   font-size: 1.3rem;
   text-align: center;
-}
-
-.modalContainer .select {
 }
 
 .modalContainer .footer {

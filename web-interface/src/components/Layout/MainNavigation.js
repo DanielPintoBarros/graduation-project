@@ -14,7 +14,7 @@ const MainNavigation = () => {
   return (
     <header className={classes.header}>
       <Link to="/">
-        <div className={classes.logo}>React Auth</div>
+        <div className={classes.logo}>App de Monitoramento</div>
       </Link>
       <nav>
         <ul>

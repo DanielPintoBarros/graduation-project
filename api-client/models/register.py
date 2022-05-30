@@ -1,7 +1,6 @@
 from db import db
 from typing import List
 from tools.enums import RegisterTypeEnum
-from models.meassure import MeassureModel
 
 class RegisterModel(db.Model):
     __tablename__ = 'registers'
@@ -17,7 +16,8 @@ class RegisterModel(db.Model):
 
     user = db.relationship("UserModel")
 
-    meassures = db.relationship("MeassureModel", cascade="all, delete-orphan")
+    meassures = db.relationship("MeassureModel", lazy="dynamic", cascade="all, delete-orphan")
+    meassures = db.relationship("AlarmDefinitionModel", lazy="dynamic", cascade="all, delete-orphan")
     
     @property
     def is_energy(self) -> bool:

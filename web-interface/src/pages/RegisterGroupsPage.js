@@ -39,7 +39,7 @@ const RegisterGroupPage = () => {
 
   return (
     <section>
-      <div>
+      <header className={classes.headerTopic}>
         <h1 className={classes.h1}>Grupos de Medidores</h1>
         <button
           className={classes.openModalBtn}
@@ -53,7 +53,7 @@ const RegisterGroupPage = () => {
             closeModal={setOpenNewRegGroup}
           />
         )}
-      </div>
+      </header>
       {isLoading && <div className={classes.content}>Loading...</div>}
       {!isLoading && groups.length === 0 && (
         <div className={classes.content}>Não foi encontrado nenhum grupo</div>
