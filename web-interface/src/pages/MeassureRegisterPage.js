@@ -65,6 +65,7 @@ const MeassureRegisterPage = () => {
           </button>
           {openNewAlarmDef && (
             <NewAlarmDefinitionForm
+              register_type={register.register_type}
               register_id={register.id}
               refreshPage={setIsLoading}
               closeModal={setOpenNewAlarmDef}

@@ -111,56 +111,68 @@ const NewAlarmDefinitionForm = (props) => {
                 <option value="WARNING">Aviso</option>
               </select>
             </div>
-            <div className={classes.control}>
-              <label htmlFor="w_thr">Limite potencia ativa - W</label>
-              <input type="text" id="w_thr" ref={wthrInputRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="va_thr">Limite potencia aparente - VA</label>
-              <input type="text" id="va_thr" ref={valuethrInputRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="vrms_thr">Limite Tensão rms - Vrms</label>
-              <input type="text" id="vrms_thr" ref={vrmsthrInputRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="irms_thr">Limite Corrente rms - Irms</label>
-              <input type="text" id="irms_thr" ref={irmsthrInputRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="fp_thr">Limite do Fator de Potência - fp</label>
-              <input type="text" id="fp_thr" ref={fpthrInputRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="e_thr">Limite do energia consumida - kwh</label>
-              <input type="text" id="e_thr" ref={ethrInputRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="energyInterval">
-                Intervalo de consumo de energia em horas - dT
-              </label>
-              <input
-                type="text"
-                id="enegyInterval"
-                ref={enegyIntervalInputRef}
-              />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="value_thr">
-                Limite Consumo de agua entre intervalos - L
-              </label>
-              <input type="text" id="value_thr" ref={valuethrInputRef} />
-            </div>
-            <div className={classes.control}>
-              <label htmlFor="waterInterval">
-                Intervalo de consumo de agua em horas - dT
-              </label>
-              <input
-                type="text"
-                id="waterInterval"
-                ref={waterIntervalInputRef}
-              />
-            </div>
+            {props.register_type.includes('ENERGY') && (
+              <div>
+                <div className={classes.control}>
+                  <label htmlFor="w_thr">Limite potencia ativa - W</label>
+                  <input type="text" id="w_thr" ref={wthrInputRef} />
+                </div>
+                <div className={classes.control}>
+                  <label htmlFor="va_thr">Limite potencia aparente - VA</label>
+                  <input type="text" id="va_thr" ref={valuethrInputRef} />
+                </div>
+                <div className={classes.control}>
+                  <label htmlFor="vrms_thr">Limite Tensão rms - Vrms</label>
+                  <input type="text" id="vrms_thr" ref={vrmsthrInputRef} />
+                </div>
+                <div className={classes.control}>
+                  <label htmlFor="irms_thr">Limite Corrente rms - Irms</label>
+                  <input type="text" id="irms_thr" ref={irmsthrInputRef} />
+                </div>
+                <div className={classes.control}>
+                  <label htmlFor="fp_thr">
+                    Limite do Fator de Potência - fp
+                  </label>
+                  <input type="text" id="fp_thr" ref={fpthrInputRef} />
+                </div>
+                <div className={classes.control}>
+                  <label htmlFor="e_thr">
+                    Limite do energia consumida - kwh
+                  </label>
+                  <input type="text" id="e_thr" ref={ethrInputRef} />
+                </div>
+                <div className={classes.control}>
+                  <label htmlFor="energyInterval">
+                    Intervalo de consumo de energia em horas - dT
+                  </label>
+                  <input
+                    type="text"
+                    id="enegyInterval"
+                    ref={enegyIntervalInputRef}
+                  />
+                </div>
+              </div>
+            )}
+            {props.register_type.includes('WATER') && (
+              <div>
+                <div className={classes.control}>
+                  <label htmlFor="value_thr">
+                    Limite Consumo de agua entre intervalos - L
+                  </label>
+                  <input type="text" id="value_thr" ref={valuethrInputRef} />
+                </div>
+                <div className={classes.control}>
+                  <label htmlFor="waterInterval">
+                    Intervalo de consumo de agua em horas - dT
+                  </label>
+                  <input
+                    type="text"
+                    id="waterInterval"
+                    ref={waterIntervalInputRef}
+                  />
+                </div>
+              </div>
+            )}
           </form>
         </div>
         <div className={classes.footer}>
