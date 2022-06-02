@@ -21,6 +21,9 @@ from models.confirmation import ConfirmationModel
 from schemas.user import UserSchema
 from tools.enums import UserAccessLevelEnum
 from datetime import timedelta
+
+from models.alarm import AlarmModel
+
 load_dotenv('.env')
 
 app = Flask(__name__)
@@ -56,8 +59,8 @@ def create_tables():
         "first_name": "admin",
         "last_name": "admin"
         })
-        user.created_at = datetime.now()
-        user.updated_at = datetime.now()
+        user.created_at = datetime.utcnow()
+        user.updated_at = datetime.utcnow()
         user.save_to_db()
 
         confirmation = ConfirmationModel(user.id)
@@ -72,8 +75,8 @@ def create_tables():
         "first_name": "modbus",
         "last_name": "modbus"
         })
-        user.created_at = datetime.now()
-        user.updated_at = datetime.now()
+        user.created_at = datetime.utcnow()
+        user.updated_at = datetime.utcnow()
         user.save_to_db()
 
         confirmation = ConfirmationModel(user.id)

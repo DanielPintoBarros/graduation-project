@@ -1,11 +1,8 @@
-import { useHistory } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
 import { useContext } from 'react';
 import classes from './AlarmDefinitionItem.module.css';
 
 const DeleteAlarmDefinitionForm = (props) => {
-  const history = useHistory();
-
   const authCtx = useContext(AuthContext);
 
   const submitHandler = (event) => {

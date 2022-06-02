@@ -16,8 +16,8 @@ class UserModel(db.Model):
     access_level = db.Column(db.Enum(UserAccessLevelEnum))
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False)
-    updated_at = db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.TIMESTAMP, nullable=False)
+    updated_at = db.Column(db.TIMESTAMP, nullable=False)
 
     confirmation = db.relationship(
         "ConfirmationModel", lazy="dynamic", cascade="all, delete-orphan"

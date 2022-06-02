@@ -51,6 +51,7 @@ const MeassureRegisterPage = () => {
         <ul className={classes.list}>
           <MeassureItem
             key={register.id}
+            refresh={!openNewAlarmDef}
             register_id={register.id}
             register_type={register.register_type}
           />

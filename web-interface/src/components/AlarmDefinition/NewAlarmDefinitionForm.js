@@ -13,7 +13,6 @@ const NewAlarmDefinitionForm = (props) => {
   const irmsthrInputRef = useRef();
   const fpthrInputRef = useRef();
   const ethrInputRef = useRef();
-  const enegyIntervalInputRef = useRef();
   const valuethrInputRef = useRef();
   const waterIntervalInputRef = useRef();
 
@@ -44,16 +43,13 @@ const NewAlarmDefinitionForm = (props) => {
       body.fp_thr = parseInt(fpthrInputRef.current.value);
     }
     if (ethrInputRef.current) {
-      body.E_thr = parseInt(ethrInputRef.current.value);
-    }
-    if (enegyIntervalInputRef.current) {
-      body.energyInterval = parseInt(enegyIntervalInputRef.current.value);
+      body.e_thr = parseInt(ethrInputRef.current.value);
     }
     if (valuethrInputRef.current) {
       body.value_thr = parseInt(valuethrInputRef.current.value);
     }
     if (waterIntervalInputRef.current) {
-      body.waterInterval = parseInt(waterIntervalInputRef.current.value);
+      body.water_interval = parseInt(waterIntervalInputRef.current.value);
     }
 
     fetch(`http://localhost:5000/alarmDefinitions`, {
@@ -119,7 +115,7 @@ const NewAlarmDefinitionForm = (props) => {
                 </div>
                 <div className={classes.control}>
                   <label htmlFor="va_thr">Limite potencia aparente - VA</label>
-                  <input type="text" id="va_thr" ref={valuethrInputRef} />
+                  <input type="text" id="va_thr" ref={vathrInputRef} />
                 </div>
                 <div className={classes.control}>
                   <label htmlFor="vrms_thr">Limite Tensão rms - Vrms</label>
@@ -141,16 +137,6 @@ const NewAlarmDefinitionForm = (props) => {
                   </label>
                   <input type="text" id="e_thr" ref={ethrInputRef} />
                 </div>
-                <div className={classes.control}>
-                  <label htmlFor="energyInterval">
-                    Intervalo de consumo de energia em horas - dT
-                  </label>
-                  <input
-                    type="text"
-                    id="enegyInterval"
-                    ref={enegyIntervalInputRef}
-                  />
-                </div>
               </div>
             )}
             {props.register_type.includes('WATER') && (
@@ -162,12 +148,12 @@ const NewAlarmDefinitionForm = (props) => {
                   <input type="text" id="value_thr" ref={valuethrInputRef} />
                 </div>
                 <div className={classes.control}>
-                  <label htmlFor="waterInterval">
+                  <label htmlFor="water_interval">
                     Intervalo de consumo de agua em horas - dT
                   </label>
                   <input
                     type="text"
-                    id="waterInterval"
+                    id="water_interval"
                     ref={waterIntervalInputRef}
                   />
                 </div>

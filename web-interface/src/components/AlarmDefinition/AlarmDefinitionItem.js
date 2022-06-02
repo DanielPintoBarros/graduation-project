@@ -25,13 +25,11 @@ const serializeAttributes = (alarmDef) => {
         return 'Limite Tensão rms';
       case 'fp_thr':
         return 'Limite Fator de Potência';
-      case 'E_thr':
+      case 'e_thr':
         return 'Limite Energia Consumida';
-      case 'energyInterval':
-        return 'Intervalo de Consumo de Energia';
       case 'value_thr':
         return 'Limite Consumo de Água';
-      case 'waterInterval':
+      case 'water_interval':
         return 'Intervalo de Consumo de Água';
       default:
         return null;

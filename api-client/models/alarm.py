@@ -10,7 +10,7 @@ class AlarmModel(db.Model):
     description = db.Column(db.String(50))
     status = db.Column(db.Enum(AlarmStatusEnum))
     severity = db.Column(db.Enum(AlarmSeverityEnum))
-    created_at = db.Column(db.DateTime)
+    created_at = db.Column(db.TIMESTAMP)
     alarm_def_id = db.Column(db.Integer, db.ForeignKey("alarm_definitions.id"))
 
     

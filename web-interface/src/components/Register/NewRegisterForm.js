@@ -69,7 +69,7 @@ const NewRegisterGroupForm = (props) => {
           </button>
         </div>
         <div className={classes.title}>
-          <h1>Criar Grupo de Medidores</h1>
+          <h1>Criar Medidor</h1>
         </div>
         <div className={classes.body}>
           <form id="createRegister" onSubmit={submitHandler}>

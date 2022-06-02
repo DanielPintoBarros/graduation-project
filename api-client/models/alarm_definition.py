@@ -17,11 +17,10 @@ class AlarmDefinitionModel(db.Model):
     irms_thr = db.Column(db.Float)
     vrms_thr = db.Column(db.Float)
     fp_thr = db.Column(db.Float)
-    E_thr = db.Column(db.Float)
-    energyInterval = db.Column(db.Integer)
+    e_thr = db.Column(db.Float)
 
-    value_thr = db.Column(db.Float)
-    waterInterval = db.Column(db.Integer)
+    water_consume = db.Column(db.Float)
+    water_interval = db.Column(db.Integer)
 
     
     @classmethod

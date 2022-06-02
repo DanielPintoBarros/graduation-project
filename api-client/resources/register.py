@@ -38,8 +38,8 @@ class RegisterRegister(Resource):
         user.email = "Register{}{}".format(register.register_type.value, register.id).lower()
         user.password = str(uuid4())[:20]
         user.access_level = UserAccessLevelEnum.REGISTER
-        user.created_at = datetime.now()
-        user.updated_at = datetime.now()
+        user.created_at = datetime.utcnow()
+        user.updated_at = datetime.utcnow()
         user.save_to_db()
 
         register.user_id = user.id

@@ -53,7 +53,7 @@ class MeassureRegister(Resource):
             meassure = watMeassure_schema.load(meassure_json)
         else:
             raise Exception("Register Type not configurated")
-        meassure.created_at = datetime.now()
+        meassure.created_at = datetime.utcnow()
         meassure.register_id = register.id
         meassure.save_to_db()
         return {"message": "Meassure created"}, 201

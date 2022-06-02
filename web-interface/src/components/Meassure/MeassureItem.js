@@ -104,13 +104,13 @@ const schemaEnergy3 = (args) => {
       <div className={classes.content}>
         <div>
           <p className={classes.row}>
-            <b>E1</b> = {args.E1.toFixed(3)} [kWh]
+            <b>E1</b> = {args.e1.toFixed(3)} [kWh]
           </p>
           <p className={classes.row}>
-            <b>E2</b> = {args.E2.toFixed(3)} [kWh]
+            <b>E2</b> = {args.e2.toFixed(3)} [kWh]
           </p>
           <p className={classes.row}>
-            <b>E3</b> = {args.E3.toFixed(3)} [kWh]
+            <b>E3</b> = {args.e3.toFixed(3)} [kWh]
           </p>
         </div>
         <div>
@@ -193,7 +193,7 @@ const MeassureItem = (props) => {
   const [firstAccess, setFirstAccess] = useState(true);
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && props.refresh) {
       setTimeout(() => {
         setIsLoading(true);
       }, 10000);

@@ -42,7 +42,7 @@ class User(Resource):
             confirmation = ConfirmationModel(user.id)
             confirmation.save_to_db()
 
-        user.updated_at = datetime.now()
+        user.updated_at = datetime.utcnow()
         user.save_to_db()
 
         if "email" in user_json:
@@ -117,8 +117,8 @@ class UserRegister(Resource):
         if UserModel.find_by_email(user.email):
             return {"message": gettext('user_email_exists').format(user.email)}, 400
         user.access_level = UserAccessLevelEnum.VIEWER
-        user.created_at = datetime.now()
-        user.updated_at = datetime.now()
+        user.created_at = datetime.utcnow()
+        user.updated_at = datetime.utcnow()
 
         try:
             user.save_to_db()
