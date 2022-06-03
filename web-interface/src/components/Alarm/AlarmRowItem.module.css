@@ -1,0 +1,17 @@
+.openModalBtn {
+  width: 50px;
+  margin: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgb(94, 46, 133);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  top: 50%;
+}
+
+.center {
+  text-align: center;
+}

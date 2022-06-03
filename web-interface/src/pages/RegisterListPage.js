@@ -1,6 +1,6 @@
 import AuthContext from '../store/auth-context';
 import { useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import classes from './RegisterGroupList.module.css';
 import RegistersComponent from '../components/Register/RegistersComponent';
 import NewRegisterForm from '../components/Register/NewRegisterForm';
@@ -49,6 +49,24 @@ const RegisterListPage = (props) => {
   return (
     <section>
       <header className={classes.headerTopic}>
+        <div id="localNavigation">
+          <Link
+            to={{
+              pathname: '/alarms',
+            }}
+          >
+            Alarms
+          </Link>
+          {'>'}
+          <Link
+            to={{
+              pathname: '/registerGroups',
+            }}
+          >
+            Grupos
+          </Link>
+          {'>'}
+        </div>
         <h1 className={classes.h1}>Medidores do Grupo</h1>
         <button
           className={classes.openModalBtn}

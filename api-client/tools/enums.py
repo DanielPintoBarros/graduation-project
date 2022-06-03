@@ -1,3 +1,4 @@
+from asyncio.base_futures import _FINISHED
 import enum
 
 
@@ -23,3 +24,4 @@ class AlarmSeverityEnum(enum.Enum):
 class AlarmStatusEnum(enum.Enum):
     ACTIVE = "ACTIVE"
     RESOLVED = "RESOLVED"
+    FINISHED = "FINISHED"

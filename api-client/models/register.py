@@ -6,6 +6,7 @@ class RegisterModel(db.Model):
     __tablename__ = 'registers'
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), nullable=False)
     description = db.Column(db.String(200), nullable=False)
     latitude = db.Column(db.String(20), nullable=False)
     longitude = db.Column(db.String(20), nullable=False)

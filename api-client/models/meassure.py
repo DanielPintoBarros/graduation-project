@@ -47,7 +47,7 @@ class MeassureModel(db.Model):
 
     @classmethod
     def last_register_meassure(cls, _id: int) -> "MeassureModel":
-        return cls.query.filter_by(register_id=_id).order_by(cls.id.desc()).first()
+        return cls.query.filter_by(register_id=_id).order_by(cls.created_at.desc()).first()
 
     def save_to_db(self) -> None:
         db.session.add(self)

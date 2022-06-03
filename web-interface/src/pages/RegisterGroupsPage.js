@@ -3,6 +3,7 @@ import { useState, useContext } from 'react';
 import classes from './RegisterGroupList.module.css';
 import RegisterGroupItem from '../components/Register/RegisterGroupItem';
 import NewRegisterGroupForm from '../components/Register/NewRegisterGroupForm';
+import { Link } from 'react-router-dom';
 
 const RegisterGroupPage = () => {
   const [openNewRegGroup, setOpenNewRegGroup] = useState(false);
@@ -40,6 +41,16 @@ const RegisterGroupPage = () => {
   return (
     <section>
       <header className={classes.headerTopic}>
+        <div id="localNavigation">
+          <Link
+            to={{
+              pathname: '/alarms',
+            }}
+          >
+            Alarms
+          </Link>
+          {'>'}
+        </div>
         <h1 className={classes.h1}>Grupos de Medidores</h1>
         <button
           className={classes.openModalBtn}

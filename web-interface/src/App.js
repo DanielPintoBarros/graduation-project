@@ -3,12 +3,12 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import UserProfile from './components/Profile/UserProfile';
 import AuthPage from './pages/AuthPage';
-import HomePage from './pages/HomePage';
 import RegisterGroupPage from './pages/RegisterGroupsPage';
 import RegisterListPage from './pages/RegisterListPage';
 import MeassureRegisterPage from './pages/MeassureRegisterPage';
 import { useContext } from 'react';
 import AuthContext from './store/auth-context';
+import AlarmsPage from './pages/AlarmsPage';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -17,13 +17,8 @@ function App() {
     <Layout>
       <Switch>
         {authCtx.isLoggedIn && (
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-        )}
-        {authCtx.isLoggedIn && (
           <Route path="/alarms" exact>
-            <div> "Alarms"</div>
+            <AlarmsPage />
           </Route>
         )}
         {authCtx.isLoggedIn && (
@@ -52,7 +47,11 @@ function App() {
           </Route>
         )}
         <Route path="*">
-          {authCtx.isLoggedIn ? <Redirect to="/" /> : <Redirect to="/auth" />}
+          {authCtx.isLoggedIn ? (
+            <Redirect to="/alarms" />
+          ) : (
+            <Redirect to="/auth" />
+          )}
         </Route>
       </Switch>
     </Layout>

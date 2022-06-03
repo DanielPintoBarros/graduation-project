@@ -22,6 +22,8 @@ class AlarmDefinitionModel(db.Model):
     water_consume = db.Column(db.Float)
     water_interval = db.Column(db.Integer)
 
+    register = db.relationship("RegisterModel")
+
     
     @classmethod
     def find_all(cls) -> List["AlarmDefinitionModel"]:

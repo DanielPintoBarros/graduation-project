@@ -25,7 +25,8 @@ const RegisterComponent = (props) => {
         )}
       </header>
       <div className={classes.content}>
-        <h3>{props.register.description}</h3>
+        <h3>{props.register.name}</h3>
+        <p>{props.register.description}</p>
         <p>Latitude: {props.register.latitude}</p>
         <p>Longitude: {props.register.longitude}</p>
         <p>Tipo do medidor: {props.register.register_type}</p>
@@ -38,7 +39,10 @@ const RegisterComponent = (props) => {
           <Link
             to={{
               pathname: '/registersMeassures',
-              state: { register: props.register },
+              state: {
+                register_id: props.register.id,
+                group_id: props.register.register_group_id,
+              },
             }}
           >
             <button>Ver detalhes</button>
