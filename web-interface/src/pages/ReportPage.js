@@ -27,16 +27,22 @@ const returnEleConfig = (register_type, meassures) => {
   const listVA3 = [];
   const listFP3 = [];
 
+  const listWater = [];
+
   meassures.forEach((element) => {
     created_at.push(element.created_at);
-
-    listE1.push(element.e1);
-    listW1.push(element.w1);
-    listVrms1.push(element.vrms1);
-    listIrms1.push(element.irms1);
-    listVA1.push(element.va1);
-    listFP1.push(element.fp1);
-
+    if (
+      register_type === 'ENERGY1' ||
+      register_type === 'ENERGY2' ||
+      register_type === 'ENERGY3'
+    ) {
+      listE1.push(element.e1);
+      listW1.push(element.w1);
+      listVrms1.push(element.vrms1);
+      listIrms1.push(element.irms1);
+      listVA1.push(element.va1);
+      listFP1.push(element.fp1);
+    }
     if (register_type === 'ENERGY2' || register_type === 'ENERGY3') {
       listE2.push(element.e2);
       listW2.push(element.w2);
@@ -45,7 +51,6 @@ const returnEleConfig = (register_type, meassures) => {
       listVA2.push(element.va2);
       listFP2.push(element.fp2);
     }
-
     if (register_type === 'ENERGY3') {
       listE3.push(element.e3);
       listW3.push(element.w3);
@@ -53,6 +58,10 @@ const returnEleConfig = (register_type, meassures) => {
       listIrms3.push(element.irms3);
       listVA3.push(element.va3);
       listFP3.push(element.fp3);
+    }
+
+    if (register_type === 'WATER') {
+      listWater.push(element.water_consume);
     }
   });
 
@@ -241,7 +250,21 @@ const returnEleConfig = (register_type, meassures) => {
       tension: 0.1,
     });
   }
-  return [dataE, dataW, dataVrms, dataIrms, dataVA, dataFP];
+
+  const dataWater = {
+    labels: created_at,
+    datasets: [
+      {
+        label: 'Consumo acumulado',
+        data: listWater,
+        fill: false,
+        borderColor: 'rgb(100, 190, 75)',
+        tension: 0.1,
+      },
+    ],
+  };
+
+  return [dataE, dataW, dataVrms, dataIrms, dataVA, dataFP, dataWater];
 };
 
 const ReportPage = () => {
@@ -251,10 +274,8 @@ const ReportPage = () => {
   const [meassures, setMeassures] = useState(location.state.meassures);
   const [openReportModal, setOpenReportModal] = useState(false);
 
-  const [dataE, dataW, dataVrms, dataIrms, dataVA, dataFP] = returnEleConfig(
-    register.register_type,
-    meassures
-  );
+  const [dataE, dataW, dataVrms, dataIrms, dataVA, dataFP, dataWater] =
+    returnEleConfig(register.register_type, meassures);
 
   return (
     <section>
@@ -317,32 +338,40 @@ const ReportPage = () => {
           )}
         </div>
       </header>
-      <div>
+      {register.register_type != 'WATER' && (
         <div>
-          <h3 className={classes.h3}>Energia consumida instantânea [kwh]</h3>
-          <LineChart chartData={dataE} />
+          <div>
+            <h3 className={classes.h3}>Energia consumida instantânea [kwh]</h3>
+            <LineChart chartData={dataE} />
+          </div>
+          <div>
+            <h3 className={classes.h3}>Potência ativa [W]</h3>
+            <LineChart chartData={dataW} />
+          </div>
+          <div>
+            <h3 className={classes.h3}>Tensão Vrms [V]</h3>
+            <LineChart chartData={dataVrms} />
+          </div>
+          <div>
+            <h3 className={classes.h3}>Corrente Irms [V]</h3>
+            <LineChart chartData={dataIrms} />
+          </div>
+          <div>
+            <h3 className={classes.h3}>Potência Aparente [VA]</h3>
+            <LineChart chartData={dataVA} />
+          </div>
+          <div>
+            <h3 className={classes.h3}>Fator de potencia</h3>
+            <LineChart chartData={dataFP} />
+          </div>
         </div>
+      )}
+      {register.register_type === 'WATER' && (
         <div>
-          <h3 className={classes.h3}>Potência ativa [W]</h3>
-          <LineChart chartData={dataW} />
+          <h3 className={classes.h3}>Água consumida</h3>
+          <LineChart chartData={dataWater} />
         </div>
-        <div>
-          <h3 className={classes.h3}>Tensão Vrms [V]</h3>
-          <LineChart chartData={dataVrms} />
-        </div>
-        <div>
-          <h3 className={classes.h3}>Corrente Irms [V]</h3>
-          <LineChart chartData={dataIrms} />
-        </div>
-        <div>
-          <h3 className={classes.h3}>Potência Aparente [VA]</h3>
-          <LineChart chartData={dataVA} />
-        </div>
-        <div>
-          <h3 className={classes.h3}>Fator de potencia</h3>
-          <LineChart chartData={dataFP} />
-        </div>
-      </div>
+      )}
     </section>
   );
 };
