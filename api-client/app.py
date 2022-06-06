@@ -15,7 +15,7 @@ from resources.alarm_definition import AlarmDefinition, AlarmDefinitionID, Alarm
 from resources.register import ( Register, RegisterList, RegisterRegister, RegisterModbus )
 from resources.register_groups import ( RegisterGroups, RegisterByRegisterGroup)
 from resources.user import ( UserRegister, UserLogin, UserLogout, TokenRefresh, UserPassword, User, UserGiveAccess )
-from resources.meassure import (MeassureRegister, MeassureFromRegister, MeassuresFromRegister, Meassure, MeassureList)
+from resources.meassure import (MeassureRegister, MeassureFromRegister, MeassureReport, MeassuresFromRegister, Meassure, MeassureList)
 from resources.confirmation import ( Confirmation, ConfirmationByUser )
 from models.user import UserModel
 from models.confirmation import ConfirmationModel
@@ -113,6 +113,7 @@ api.add_resource(RegisterByRegisterGroup, "/regGroup/<int:id>/registers" )
 
 api.add_resource(MeassureList, "/meassures")
 api.add_resource(Meassure, "/meassure/<int:id>")
+api.add_resource(MeassureReport, "/reportMeassures/<int:regId>")
 
 api.add_resource(MeassureRegister, "/meassure")
 api.add_resource(MeassureFromRegister,"/register/<int:registerId>/lastMeassure")

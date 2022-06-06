@@ -9,6 +9,7 @@ import MeassureRegisterPage from './pages/MeassureRegisterPage';
 import { useContext } from 'react';
 import AuthContext from './store/auth-context';
 import AlarmsPage from './pages/AlarmsPage';
+import ReportPage from './pages/ReportPage';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -44,6 +45,11 @@ function App() {
         {authCtx.isLoggedIn && (
           <Route path="/profile">
             <UserProfile />
+          </Route>
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/report">
+            <ReportPage />
           </Route>
         )}
         <Route path="*">

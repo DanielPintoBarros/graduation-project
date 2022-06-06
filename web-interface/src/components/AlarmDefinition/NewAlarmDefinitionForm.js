@@ -63,9 +63,6 @@ const NewAlarmDefinitionForm = (props) => {
       if (res.ok) {
         props.closeModal(false);
         props.refreshPage(true);
-      } else {
-        console.log(res);
-        res.json().then((error) => console.log(error));
       }
     });
   };

@@ -161,3 +161,37 @@ class Meassure(Resource):
             meassure.delete_from_db()
             return {"message": "Meassure deleted from db"}, 200
         return {"message": "Measure not found"}, 404
+
+
+class MeassureReport(Resource):
+    @classmethod
+    @jwt_required()
+    def post(cls, regId):
+        try:
+            checkAccessAllowed([UserAccessLevelEnum.ADMIN, UserAccessLevelEnum.OPERATOR, UserAccessLevelEnum.VIEWER])
+        except:
+            return {"message": "User not allowed"}, 401
+
+        req_json = request.get_json()
+        register = RegisterModel.find_by_id(regId)
+        if register:
+            if req_json["day"]:
+                range_min = req_json["day"] + " 00:00:00"
+                range_max = req_json["day"] + " 23:59:59"
+                meassures = MeassureModel.find_range_by_register(regId, range_min, range_max)
+                if register.register_type == RegisterTypeEnum.ENERGY1:
+                    return {"meassures":  eleMonMeassure_list_schema.dump(meassures),
+                            "register": register_schema.dump(register)}, 200
+                if register.register_type == RegisterTypeEnum.ENERGY2:
+                    return {"meassures":  eleBiMeassure_list_schema.dump(meassures),
+                            "register": register_schema.dump(register)}, 200
+                if register.register_type == RegisterTypeEnum.ENERGY3:
+                    return {"meassures":  eleTriMeassure_list_schema.dump(meassures),
+                            "register": register_schema.dump(register)}, 200
+                if register.register_type == RegisterTypeEnum.WATER:
+                    return {"meassures":  watMeassure_list_schema.dump(meassures),
+                            "register": register_schema.dump(register)}, 200
+            return {"message": "Missing 'day' field"}, 400
+        return {"message": "Register not found"}, 404
+
+

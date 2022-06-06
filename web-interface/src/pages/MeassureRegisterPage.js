@@ -6,6 +6,7 @@ import RegistersComponent from '../components/Register/RegistersComponent';
 import MeassureItem from '../components/Meassure/MeassureItem';
 import AlarmDefinitionItem from '../components/AlarmDefinition/AlarmDefinitionItem';
 import NewAlarmDefinitionForm from '../components/AlarmDefinition/NewAlarmDefinitionForm';
+import ReportConfigButtonForm from '../components/Report/ReportConfigButtonForm';
 
 const MeassureRegisterPage = () => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const MeassureRegisterPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRegisterLoading, setIsRegisterLoading] = useState(true);
   const [openNewAlarmDef, setOpenNewAlarmDef] = useState(false);
+  const [openReportModal, setOpenReportModal] = useState(false);
 
   function fetchRegister() {
     fetch(`http://localhost:5000/register/${register_id}`, {
@@ -89,7 +91,22 @@ const MeassureRegisterPage = () => {
               </Link>
               {'>'}
             </div>
+
             <h1 className={classes.h1}>Medidor</h1>
+            <div>
+              <button
+                className={classes.openModalBtn}
+                onClick={() => setOpenReportModal(true)}
+              >
+                Mostrar Gráficos
+              </button>
+              {openReportModal && (
+                <ReportConfigButtonForm
+                  closeModal={setOpenReportModal}
+                  regId={register_id}
+                />
+              )}
+            </div>
           </header>
           <ul className={classes.list}>
             <RegistersComponent

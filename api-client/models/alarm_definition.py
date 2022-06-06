@@ -22,7 +22,7 @@ class AlarmDefinitionModel(db.Model):
     water_consume = db.Column(db.Float)
     water_interval = db.Column(db.Integer)
 
-    register = db.relationship("RegisterModel")
+    register = db.relationship("RegisterModel", viewonly=True)
 
     
     @classmethod

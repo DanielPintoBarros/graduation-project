@@ -1,5 +1,7 @@
 from db import db
 from typing import List
+from datetime import datetime
+from sqlalchemy import and_
 
 
 class MeassureModel(db.Model):
@@ -32,6 +34,7 @@ class MeassureModel(db.Model):
 
     water_consume = db.Column(db.Float)
 
+    register = db.relationship("RegisterModel")
 
     @classmethod
     def find_all(cls) -> List["MeassureModel"]:
@@ -40,6 +43,10 @@ class MeassureModel(db.Model):
     @classmethod
     def find_all_by_register(cls, registerId: int) -> List["MeassureModel"]:
         return cls.query.filter_by(register_id=registerId).all()
+
+    @classmethod
+    def find_range_by_register(cls, registerId: int, range_min: datetime, range_max: datetime) -> List["MeassureModel"]:
+        return cls.query.filter(and_(cls.register_id == registerId, cls.created_at >= range_min, cls.created_at <= range_max)).order_by(cls.created_at).all()
 
     @classmethod
     def find_by_id(cls, _id: int) -> "MeassureModel":
