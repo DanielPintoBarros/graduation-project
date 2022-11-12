@@ -8,7 +8,7 @@ class RegisterGroupModel(db.Model):
     name = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.String(50))
 
-    registers = db.relationship("RegisterModel", lazy="dynamic", cascade="all, delete-orphan")
+    registers = db.relationship("RegisterModel", lazy="dynamic", cascade="all,delete-orphan")
 
     @classmethod
     def find_all(cls) -> List["RegisterGroupModel"]:

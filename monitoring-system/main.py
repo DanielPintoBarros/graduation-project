@@ -75,6 +75,8 @@ def runAlarmCheckAndCreationRoutine(conn):
 
     (last_eleCheck, last_watCheck) = getLastCheck(conn.cursor())
     alarmDefinitions = AlarmDefinitions.find_all(conn.cursor())
+    if len(alarmDefinitions) == 0:
+        return
     alarmsDef_alarms = Alarm.findAll(conn.cursor(), alarmDefinitions)
     energyRegIDs = list({ad.register_id for ad in alarmDefinitions if "ENERGY" in ad.register_type})
     waterRegIDs = list({ad.register_id for ad in alarmDefinitions if "WATER" in ad.register_type})

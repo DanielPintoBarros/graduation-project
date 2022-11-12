@@ -23,6 +23,7 @@ class AlarmDefinitionModel(db.Model):
     water_interval = db.Column(db.Integer)
 
     register = db.relationship("RegisterModel", viewonly=True)
+    alarm = db.relationship("AlarmModel", cascade="all, delete-orphan", overlaps="alarmDef")
 
     
     @classmethod

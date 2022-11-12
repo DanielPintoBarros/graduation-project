@@ -6,13 +6,17 @@ import AuthPage from './pages/AuthPage';
 import RegisterGroupPage from './pages/RegisterGroupsPage';
 import RegisterListPage from './pages/RegisterListPage';
 import MeassureRegisterPage from './pages/MeassureRegisterPage';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import AuthContext from './store/auth-context';
 import AlarmsPage from './pages/AlarmsPage';
 import ReportPage from './pages/ReportPage';
 
 function App() {
   const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    document.title = 'Monitoramento';
+  });
 
   return (
     <Layout>

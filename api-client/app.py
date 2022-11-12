@@ -106,7 +106,6 @@ api.add_resource(RegisterRegister, "/register")
 api.add_resource(Register, "/register/<int:id>")
 api.add_resource(RegisterList, "/registers")
 api.add_resource(RegisterModbus,"/registers/modbusOn")
-
         
 api.add_resource(RegisterGroups, "/regGroup" )
 api.add_resource(RegisterByRegisterGroup, "/regGroup/<int:id>/registers" )

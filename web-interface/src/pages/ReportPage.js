@@ -338,7 +338,7 @@ const ReportPage = () => {
           )}
         </div>
       </header>
-      {register.register_type != 'WATER' && (
+      {register.register_type !== 'WATER' && (
         <div>
           <div>
             <h3 className={classes.h3}>Energia consumida instantânea [kwh]</h3>

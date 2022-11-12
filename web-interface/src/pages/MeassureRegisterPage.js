@@ -112,6 +112,7 @@ const MeassureRegisterPage = () => {
             <RegistersComponent
               key={register.id}
               register={register}
+              setIsLoading={setIsLoading}
               center={true}
             />
           </ul>

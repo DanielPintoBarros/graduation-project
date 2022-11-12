@@ -13,7 +13,7 @@ const NewAlarmDefinitionForm = (props) => {
   const irmsthrInputRef = useRef();
   const fpthrInputRef = useRef();
   const ethrInputRef = useRef();
-  const valuethrInputRef = useRef();
+  const waterConsumeInputRef = useRef();
   const waterIntervalInputRef = useRef();
 
   const submitHandler = (event) => {
@@ -45,8 +45,8 @@ const NewAlarmDefinitionForm = (props) => {
     if (ethrInputRef.current) {
       body.e_thr = parseInt(ethrInputRef.current.value);
     }
-    if (valuethrInputRef.current) {
-      body.value_thr = parseInt(valuethrInputRef.current.value);
+    if (waterConsumeInputRef.current) {
+      body.water_consume = parseInt(waterConsumeInputRef.current.value);
     }
     if (waterIntervalInputRef.current) {
       body.water_interval = parseInt(waterIntervalInputRef.current.value);
@@ -139,10 +139,14 @@ const NewAlarmDefinitionForm = (props) => {
             {props.register_type.includes('WATER') && (
               <div>
                 <div className={classes.control}>
-                  <label htmlFor="value_thr">
+                  <label htmlFor="water_consume">
                     Limite Consumo de agua entre intervalos - L
                   </label>
-                  <input type="text" id="value_thr" ref={valuethrInputRef} />
+                  <input
+                    type="text"
+                    id="water_consume"
+                    ref={waterConsumeInputRef}
+                  />
                 </div>
                 <div className={classes.control}>
                   <label htmlFor="water_interval">

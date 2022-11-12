@@ -8,7 +8,7 @@ class MeassureModel(db.Model):
     __tablename__= 'meassures'
 
     id = db.Column(db.Integer, primary_key=True)
-    register_id = db.Column(db.Integer, db.ForeignKey("registers.id"), nullable=False)
+    register_id = db.Column(db.Integer, db.ForeignKey("registers.id", ondelete='SET NULL'), nullable=True)
     created_at = db.Column(db.TIMESTAMP(), nullable=False)
 
     vrms1 = db.Column(db.Float)

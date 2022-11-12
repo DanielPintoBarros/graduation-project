@@ -8,6 +8,7 @@ const NewRegisterGroupForm = (props) => {
 
   const authCtx = useContext(AuthContext);
 
+  const nameInputRef = useRef();
   const descriptionInputRef = useRef();
   const latitudeInputRef = useRef();
   const longitudeInputRef = useRef();
@@ -17,6 +18,7 @@ const NewRegisterGroupForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
+    const enteredName = nameInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
     const enteredLatitude = latitudeInputRef.current.value;
     const enteredLongitude = longitudeInputRef.current.value;
@@ -24,6 +26,7 @@ const NewRegisterGroupForm = (props) => {
     const enteredModbusPort = modbusPortInputRef.current.value;
 
     const body = {
+      name: enteredName,
       description: enteredDescription,
       latitude: enteredLatitude,
       longitude: enteredLongitude,
@@ -73,6 +76,10 @@ const NewRegisterGroupForm = (props) => {
         </div>
         <div className={classes.body}>
           <form id="createRegister" onSubmit={submitHandler}>
+            <div className={classes.control}>
+              <label htmlFor="name">Nome</label>
+              <input type="text" id="name" required ref={nameInputRef} />
+            </div>
             <div className={classes.control}>
               <label htmlFor="description">Descrição</label>
               <input
