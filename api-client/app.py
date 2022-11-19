@@ -94,38 +94,38 @@ def check_if_token_in_blocklist(jwt_header, jwt_payload):
 def home():
     return "Hello!"
 
-api.add_resource(User, "/user")
-api.add_resource(UserRegister, "/signup")
-api.add_resource(UserLogin, "/login")
-api.add_resource(TokenRefresh, "/refresh")
-api.add_resource(UserLogout, "/logout")
-api.add_resource(UserPassword, "/user/change/password")
-api.add_resource(UserGiveAccess, "/user/change/access")
+api.add_resource(User, "/user") # POST | DELETE
+api.add_resource(UserRegister, "/signup") # POST
+api.add_resource(UserLogin, "/login") # POST
+api.add_resource(TokenRefresh, "/refresh") # POST
+api.add_resource(UserLogout, "/logout") # POST
+api.add_resource(UserPassword, "/user/change/password") # POST
+api.add_resource(UserGiveAccess, "/user/change/access") # POST
 
-api.add_resource(RegisterRegister, "/register")
-api.add_resource(Register, "/register/<int:id>")
-api.add_resource(RegisterList, "/registers")
-api.add_resource(RegisterModbus,"/registers/modbusOn")
+api.add_resource(RegisterRegister, "/register") # POST
+api.add_resource(Register, "/register/<int:id>") # GET | PUT | DELETE
+api.add_resource(RegisterList, "/registers") # GET
+api.add_resource(RegisterModbus,"/registers/modbusOn") # GET
         
-api.add_resource(RegisterGroups, "/regGroup" )
-api.add_resource(RegisterByRegisterGroup, "/regGroup/<int:id>/registers" )
+api.add_resource(RegisterGroups, "/regGroup" ) # GET | POST | PUT | DELETE
+api.add_resource(RegisterByRegisterGroup, "/regGroup/<int:id>/registers" ) # GET
 
-api.add_resource(MeassureList, "/meassures")
-api.add_resource(Meassure, "/meassure/<int:id>")
-api.add_resource(MeassureReport, "/reportMeassures/<int:regId>")
+api.add_resource(MeassureList, "/meassures") # GET
+api.add_resource(Meassure, "/meassure/<int:id>") # GET | DELETE
+api.add_resource(MeassureReport, "/reportMeassures/<int:regId>") # POST
 
-api.add_resource(MeassureRegister, "/meassure")
-api.add_resource(MeassureFromRegister,"/register/<int:registerId>/lastMeassure")
-api.add_resource(MeassuresFromRegister,"/register/<int:registerId>/meassures")
-api.add_resource(Confirmation, "/confirmation/<string:confirmation_id>")
-api.add_resource(ConfirmationByUser, "/resentconfirmationemail/<string:user_email>")
+api.add_resource(MeassureRegister, "/meassure") # POST
+api.add_resource(MeassureFromRegister,"/register/<int:registerId>/lastMeassure") # GET
+api.add_resource(MeassuresFromRegister,"/register/<int:registerId>/meassures") # GET
+api.add_resource(Confirmation, "/confirmation/<string:confirmation_id>") # GET
+api.add_resource(ConfirmationByUser, "/resentconfirmationemail/<string:user_email>") # POST
 
-api.add_resource(AlarmOpen, '/openAlarms')
-api.add_resource(AlarmCloseID, '/closeAlarm/<int:id>')
+api.add_resource(AlarmOpen, '/openAlarms') # GET
+api.add_resource(AlarmCloseID, '/closeAlarm/<int:id>') # POST
 
-api.add_resource(AlarmDefinition, '/alarmDefinitions')
-api.add_resource(AlarmDefinitionID, '/alarmDefinitions/<int:id>')
-api.add_resource(AlarmDefinitionRegisterID, '/register/<int:id>/alarmDefinitions')
+api.add_resource(AlarmDefinition, '/alarmDefinitions') # GET | POST
+api.add_resource(AlarmDefinitionID, '/alarmDefinitions/<int:id>') # GET | DELETE
+api.add_resource(AlarmDefinitionRegisterID, '/register/<int:id>/alarmDefinitions') #GET
 
 if __name__ == "__main__":
     db.init_app(app)
