@@ -1,3 +1,4 @@
 # Graduation Project
 
-To do -- implement ReadME
+Para executar o projeto, basta realizar o clone do repositório e executar:
+docker-compose up --build
