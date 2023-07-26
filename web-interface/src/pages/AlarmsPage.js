@@ -19,7 +19,7 @@ const AlarmsPage = () => {
     }
   });
   function fetchAlarms() {
-    fetch('http://localhost:5000/openAlarms', {
+    fetch(`/api/openAlarms`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

@@ -40,7 +40,7 @@ export const AuthContextProvider = (props) => {
 
   const logoutHandler = useCallback(() => {
     if (token) {
-      fetch('http://localhost:5000/logout', {
+      fetch(`/api/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

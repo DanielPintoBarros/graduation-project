@@ -11,7 +11,7 @@ const DeleteRegisterGroupForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    fetch(`http://localhost:5000/regGroup`, {
+    fetch(`/api/regGroup`, {
       method: 'DELETE',
       body: JSON.stringify({
         id: props.id,

@@ -25,7 +25,7 @@ const AuthSignupForm = () => {
       alert('The passwords are not matching!');
     } else {
       setIsLoading(true);
-      fetch('http://localhost:5000/signup', {
+      fetch(`/api/signup`, {
         method: 'POST',
         body: JSON.stringify({
           email: enteredEmail,
@@ -53,11 +53,11 @@ const AuthSignupForm = () => {
       <h1>Sign Up</h1>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>
-          <label htmlFor="email">Your Email</label>
+          <label htmlFor="email">Email</label>
           <input type="email" id="email" required ref={emailInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="password">Your Password</label>
+          <label htmlFor="password">Senha</label>
           <input
             type="password"
             id="password"
@@ -66,7 +66,7 @@ const AuthSignupForm = () => {
           />
         </div>
         <div className={classes.control}>
-          <label htmlFor="password_confirm">Confirm Your Password</label>
+          <label htmlFor="password_confirm">Confirme sua senha</label>
           <input
             type="password"
             id="password_confirm"
@@ -75,16 +75,16 @@ const AuthSignupForm = () => {
           />
         </div>
         <div className={classes.control}>
-          <label htmlFor="first_name">First Name</label>
+          <label htmlFor="first_name">Nome</label>
           <input type="text" id="first_name" required ref={firstNameInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="last_name">Last Name</label>
+          <label htmlFor="last_name">Sobrenome</label>
           <input type="text" id="last_name" required ref={lastNameInputRef} />
         </div>
         <div className={classes.actions}>
-          {!isLoading && <button>Create Account</button>}
-          {isLoading && <p>Sending request...</p>}
+          {!isLoading && <button>Criar Conta</button>}
+          {isLoading && <p>Enviando requisição...</p>}
         </div>
       </form>
     </div>

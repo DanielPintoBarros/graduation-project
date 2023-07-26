@@ -23,7 +23,7 @@ const MeassureRegisterPage = () => {
   const [openReportModal, setOpenReportModal] = useState(false);
 
   function fetchRegister() {
-    fetch(`http://localhost:5000/register/${register_id}`, {
+    fetch(`/api/register/${register_id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const MeassureRegisterPage = () => {
     });
   }
   function fetchAlarmDefinitions() {
-    fetch(`http://localhost:5000/register/${register_id}/alarmDefinitions`, {
+    fetch(`/api/register/${register_id}/alarmDefinitions`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

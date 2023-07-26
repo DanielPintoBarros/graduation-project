@@ -12,7 +12,7 @@ const RegisterGroupPage = () => {
   const [groups, setGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   function fetchRegisterGroups() {
-    fetch('http://localhost:5000/regGroup', {
+    fetch(`/api/regGroup`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

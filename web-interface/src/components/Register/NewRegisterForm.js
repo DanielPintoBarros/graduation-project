@@ -37,7 +37,7 @@ const NewRegisterGroupForm = (props) => {
     if (enteredModbusPort) {
       body.modbus_port = enteredModbusPort;
     }
-    fetch('http://localhost:5000/register', {
+    fetch(`/api/register`, {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {

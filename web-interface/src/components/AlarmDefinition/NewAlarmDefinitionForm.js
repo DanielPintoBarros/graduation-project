@@ -52,7 +52,7 @@ const NewAlarmDefinitionForm = (props) => {
       body.water_interval = parseInt(waterIntervalInputRef.current.value);
     }
 
-    fetch(`http://localhost:5000/alarmDefinitions`, {
+    fetch(`/api/alarmDefinitions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

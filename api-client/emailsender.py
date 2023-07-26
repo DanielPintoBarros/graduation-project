@@ -6,13 +6,13 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 load_dotenv('.env')
 
-login = os.environ.get("EMAIL_SENDER_LOGIN")
-passwd = os.environ.get("EMAIL_SENDER_PASSWD")
+login = "verifyemailapiclient@gmail.com"#os.environ.get("EMAIL_SENDER_LOGIN")
+passwd = "Ynb2Yepp"
 port = os.environ.get("EMAIL_SENDER_PORT")
 host = os.environ.get("EMAIL_SENDER_HOST")
     
 def send_email(to, subject, body):
-    server = smtplib.SMTP(host, port)
+    server = smtplib.SMTP("localhost")
     server.ehlo()
     server.starttls()
     server.login(login, passwd)

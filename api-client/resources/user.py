@@ -116,23 +116,29 @@ class UserRegister(Resource):
 
         if UserModel.find_by_email(user.email):
             return {"message": gettext('user_email_exists').format(user.email)}, 400
-        user.access_level = UserAccessLevelEnum.VIEWER
+        user.access_level = UserAccessLevelEnum.ADMIN
         user.created_at = datetime.utcnow()
         user.updated_at = datetime.utcnow()
 
         try:
             user.save_to_db()
-
             confirmation = ConfirmationModel(user.id)
+            confirmation.confirmed = True
             confirmation.save_to_db()
 
-            print("prepare to send email")
-            user.send_confirmation_email()
+        except Exception as e:
+            user.delete_from_db()
+            return {"message": "Failed to create a user"}, 500
+        try:
+
+
+            #print("prepare to send email")
+            #user.send_confirmation_email()
             return {"message": "User created! We send you a email to confirm the registration.",
                     "user": user_schema.dump(user)}, 201
         except Exception as e:
             user.delete_from_db()
-            return {"message": "Failed to create a user"}, 500
+            return {"message": "Failed to create a confirmation", "details": {e}}, 500
 
 
 class UserLogin(Resource):

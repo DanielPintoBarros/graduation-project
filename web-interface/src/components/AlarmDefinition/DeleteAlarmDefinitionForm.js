@@ -8,7 +8,7 @@ const DeleteAlarmDefinitionForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    fetch(`http://localhost:5000/alarmDefinitions/${props.id}`, {
+    fetch(`/api/alarmDefinitions/${props.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ const CloseAlarmForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    fetch(`http://localhost:5000/closeAlarm/${props.id}`, {
+    fetch(`/api/closeAlarm/${props.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

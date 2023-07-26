@@ -19,7 +19,7 @@ const AuthLoginForm = () => {
     const enteredPassword = passwordInputRef.current.value;
 
     setIsLoading(true);
-    fetch('http://localhost:5000/login', {
+    fetch(`/api/login`, {
       method: 'POST',
       body: JSON.stringify({
         email: enteredEmail,
@@ -50,11 +50,11 @@ const AuthLoginForm = () => {
       <h1>Login</h1>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>
-          <label htmlFor="email">Your Email</label>
+          <label htmlFor="email">Email</label>
           <input type="text" id="email" required ref={emailInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor="password">Your Password</label>
+          <label htmlFor="password">Senha</label>
           <input
             type="password"
             id="password"
@@ -64,7 +64,7 @@ const AuthLoginForm = () => {
         </div>
         <div className={classes.actions}>
           {!isLoading && <button>Login</button>}
-          {isLoading && <p>Sending request...</p>}
+          {isLoading && <p>Enviando requisição...</p>}
         </div>
       </form>
     </div>

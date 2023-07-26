@@ -201,7 +201,7 @@ const MeassureItem = (props) => {
   });
 
   function fetchRegistersMeassure() {
-    fetch(`http://localhost:5000/register/${props.register_id}/lastMeassure`, {
+    fetch(`/api/register/${props.register_id}/lastMeassure`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

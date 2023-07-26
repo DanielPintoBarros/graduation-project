@@ -11,7 +11,7 @@ const DeleteRegisterForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    fetch(`http://localhost:5000/register/${props.regId}`, {
+    fetch(`/api/register/${props.regId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

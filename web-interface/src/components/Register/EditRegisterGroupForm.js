@@ -17,7 +17,7 @@ const EditRegisterGroupForm = (props) => {
     const enteredName = nameInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
 
-    fetch(`http://localhost:5000/regGroup`, {
+    fetch(`/api/regGroup`, {
       method: 'PUT',
       body: JSON.stringify({
         id: props.id,

@@ -17,7 +17,7 @@ const NewRegisterGroupForm = (props) => {
     const enteredName = nameInputRef.current.value;
     const enteredDescription = descriptionInputRef.current.value;
 
-    fetch('http://localhost:5000/regGroup', {
+    fetch(`/api/regGroup`, {
       method: 'POST',
       body: JSON.stringify({
         name: enteredName,

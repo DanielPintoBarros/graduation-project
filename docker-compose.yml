@@ -15,12 +15,13 @@ services:
   nginx:
     depends_on:
       - api-client
+      - web-interface
     restart: always
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
-      - '5000:80'
+      - '3050:80'
 
   api-client:
     depends_on:
@@ -37,8 +38,8 @@ services:
       PGDATABASE: postgres
       PGPASSWORD: postgres_password
       PGPORT: 5432
-    expose:
-      - '5000'
+    ports:
+      - '5000:5000'
 
   mudbus-listener:
     depends_on:
@@ -67,16 +68,17 @@ services:
       context: ./monitoring-system
     volumes:
       - ./monitoring-system:/app
-#  web-interface:
-#    depends_on:
-#      - api-client
-#    build:
-#      dockerfile: Dockerfile.dev
-#      context: ./web-interface
-#    volumes:
-#      - ./web-interface:/app
-#    restart: always
-#    environment:
-#      APICLIENTURL: api-client
-#    expose:
-#      - '3000'
+
+  web-interface:
+    depends_on:
+      - api-client
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./web-interface
+    volumes:
+      - ./web-interface:/app
+    restart: always
+    environment:
+      APICLIENTURL: localhost:5000
+    ports:
+      - '3000:3000'

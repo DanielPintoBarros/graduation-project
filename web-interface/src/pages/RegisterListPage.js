@@ -14,7 +14,7 @@ const RegisterListPage = (props) => {
 
   function fetchRegisters() {
     const regGroupId = location.state.regGroupId;
-    fetch(`http://localhost:5000/regGroup/${regGroupId}/registers`, {
+    fetch(`/api/regGroup/${regGroupId}/registers`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

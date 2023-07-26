@@ -13,7 +13,7 @@ const ReportConfigButtonForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    fetch(`http://localhost:5000/reportMeassures/${props.regId}`, {
+    fetch(`/api/reportMeassures/${props.regId}`, {
       method: 'POST',
       body: JSON.stringify({
         day: dayInputRef.current.value,
